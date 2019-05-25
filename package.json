@@ -4,9 +4,10 @@
   "description": "Discord bot by CalamarCat for Victory Road's Code-off Challenge",
   "main": "build/index.js",
   "scripts": {
+    "start": "tsc && node .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "CalamarCat",
   "license": "ISC",
   "dependencies": {
     "discord.js": "^11.5.0",
