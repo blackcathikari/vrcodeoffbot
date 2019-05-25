@@ -12,7 +12,7 @@
   "dependencies": {
     "discord.js": "^11.5.0",
     "esm": "^3.2.25",
-    "typescript": "^3.4.5",
-    "@ephox/katamari": "latest"
+    "systeminformation": "^4.5.1",
+    "typescript": "^3.4.5"
   }
 }
