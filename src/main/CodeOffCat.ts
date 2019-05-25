@@ -2,6 +2,8 @@
 import { Client } from 'discord.js';
 import key from '../../key';
 import SysInfo from '../cmds/SysInfo';
+import Calc from '../cmds/Calc';
+import Help from '../cmds/Help';
 
 // set up discord client
 const client = new Client();
@@ -22,11 +24,11 @@ const msgParser = (msg, content) => {
   // switch on the various command types
   switch (args[0]) {
     case 'calc': {
-      unimplementedMsg(msg);
+      Calc.reply(msg, args.slice(1, args.length));
       break;
     }
     case 'help': {
-      unimplementedMsg(msg);
+      Help.reply(msg, args);
       break;
     }
     case 'whatshot': {

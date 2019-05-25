@@ -2,29 +2,27 @@ const si = require('systeminformation');
 
 interface SysInfo {
   osName: string;
-  kernalVer: string;
+  kernelVer: string;
   sysUptime: string; // in days
   ramAvailable?: string; //gb
-  ramTotal?: string; // gb
+  ramTotal: string; // gb
   bootDiskName: string;
   storageCapacity: string;
 }
 
-const mergeObjs = (objs: Object[]): Record<string, any> => {
+const mergeObjs = (objs: Object[]): SysInfo => {
   const nu = {};
   objs.forEach((obj) => {
     const keys = Object.keys(obj);
-    console.log(keys);
     keys.forEach((key) => {
-      console.log('entry', key, obj[key]);
       nu[key] = obj[key];
     })
   });
-  return nu;
+  return nu as SysInfo;
 }
 
-const bytes2Gb = (bytes) => `${(bytes / 1024 / 1024 / 1024).toPrecision(2)} GB`;
-const bytes2Tb = (bytes) => `${(bytes / 1024 / 1024 / 1024 / 1024).toPrecision(2)} TB`;
+const bytes2Gb = (bytes) => `${(bytes / 1024 / 1024 / 1024).toFixed(2)} GB`;
+const bytes2Tb = (bytes) => `${(bytes / 1024 / 1024 / 1024 / 1024).toFixed(2)} TB`;
 
 const calcRam = (rams) => {
   let total = 0;
@@ -34,17 +32,12 @@ const calcRam = (rams) => {
 
 const getInfo = (): Promise<any> => {
   const os = si.osInfo().then((data) => {
-    console.log(data);
     return {
       osName: data.distro,
       kernelVer: data.kernel
     };
   });
-  // const time = si.time().then((data) => {
-  //   return { sysUptime: data.uptime };
-  // });
   const disk = si.getStaticData().then((data) => {
-    console.log(data);
     return {
       bootDiskName: data.diskLayout[0].name,
       storageCapacity: bytes2Tb(data.diskLayout[0].size),
@@ -58,13 +51,12 @@ const getInfo = (): Promise<any> => {
 const getUptime = () => {
   const seconds = Math.abs(si.time().uptime);
   const days = seconds / 60 / 60 / 24;
-  return `${days.toPrecision(2)} days`;
+  return `${days.toFixed(2)} days`;
 };
 
 const reply = (msg) => {
   return getInfo().then((data) => {
-    const info = mergeObjs(data.concat({ sysUptime: getUptime() }));
-    console.log(info);
+    const info: SysInfo = mergeObjs(data.concat({ sysUptime: getUptime() }));
     const embed = {
       color: 3447003,
       title: "System Information",
