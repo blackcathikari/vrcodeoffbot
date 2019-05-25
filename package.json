@@ -1,0 +1,17 @@
+{
+  "name": "codeoffcat",
+  "version": "0.0.1",
+  "description": "Discord bot by CalamarCat for Victory Road's Code-off Challenge",
+  "main": "build/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^11.5.0",
+    "esm": "^3.2.25",
+    "typescript": "^3.4.5",
+    "@ephox/katamari": "latest"
+  }
+}
