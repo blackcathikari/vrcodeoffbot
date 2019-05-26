@@ -7,6 +7,8 @@ const helpMsg = `**!help**: Shows information about available commands.
 **Usage:** \`help <command>\`. Available commands are:
 - \`calc\`
 - \`from\`
+- \`roles\`
+- \`from\`
 - \`sysinfo\``;
 
 const calcMsg = `**!calc**: Performs a math calculation on two numbers.
@@ -32,6 +34,11 @@ const fromMsg = `**!from**: Performs unit conversion between two units.
 --- US: oz (fluid), qt, gal
 - *Temperature:* c, f, k`;
 
+const rolesMsg = `**!roles**: Role management.
+
+**Usage:** \`!roles giveme <rolename>\`
+- \`<rolename>\`: Role to give yourself. Available roles are \`Blinky\`, \`Pinky\`, \`Inky\`, \`Clyde\`, \`Pac Ghost\``;
+
 const sysinfoMsg = `**!sysinfo**: Shows information about the system on which the bot is running.`;
 
 const sendEmbed = (msg, content) => msg.channel.send({embed: { color: 3447003, description: content } });
@@ -55,7 +62,7 @@ const reply = (msg, args) => {
         break;
       }
       case 'roles': {
-        unimplementedMsg(msg);
+        sendEmbed(msg, rolesMsg);
         break;
       }
       case 'sysinfo': {

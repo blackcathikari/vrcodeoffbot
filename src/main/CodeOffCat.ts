@@ -6,6 +6,7 @@ import Calc from '../cmds/Calc';
 import Help from '../cmds/Help';
 import From from '../cmds/From';
 import Swears from './Swears';
+import Roles from '../cmds/Roles';
 
 // set up discord client
 const client = new Client();
@@ -37,7 +38,7 @@ const msgParser = (msg, content) => {
       break;
     }
     case 'roles': {
-      unimplementedMsg(msg);
+      Roles.reply(msg, args);
       break;
     }
     case 'sysinfo': {
@@ -51,12 +52,11 @@ const msgParser = (msg, content) => {
     default: {
       fallbackMsg(msg);
     }
-    // plus word blacklist
   }
 };
 
 client.on('message', (msg) => {
-  if (msg.channel.id === '572770333648617472') {
+  if (msg.channel.id === '572770333648617472' || msg.channel.id === '581672404397588490') {
     Swears.reply(msg);
     if (msg.content.startsWith('!')) {
       var role = msg.guild.me.hasPermission(['SEND_MESSAGES']);
