@@ -18,10 +18,10 @@ const calcMsg = `**!calc**: Performs a math calculation on two numbers.
 
 const fromMsg = `**!from**: Performs unit conversion between two units.
 
-**Usage:** \`from <number> <unit> to <newUnit>\`
+**Usage:** \`from <number> <fromUnit> to <toUnit>\`
 - \`<number>\`: a valid integer or decimal number
-- \`<unit>\`: the unit to convert from
-- \`<newUnit>\`: the unit to convert to
+- \`<fromUnit>\`: the unit to convert from
+- \`<toUnit>\`: the unit to convert to
 
 **Available units**:
 - *Distance:*
@@ -47,7 +47,7 @@ const reply = (msg, args) => {
         break;
       }
       case 'help': {
-        unimplementedMsg(msg);
+        sendEmbed(msg, helpMsg);
         break;
       }
       case 'whatshot': {

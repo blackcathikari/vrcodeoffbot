@@ -5,6 +5,7 @@ import SysInfo from '../cmds/SysInfo';
 import Calc from '../cmds/Calc';
 import Help from '../cmds/Help';
 import From from '../cmds/From';
+import Swears from './Swears';
 
 // set up discord client
 const client = new Client();
@@ -20,8 +21,6 @@ const unimplementedMsg = (msg) => msg.channel.send('Sorry, this command is not i
 const msgParser = (msg, content) => {
   // strip the ! then split on space
   const args = content.slice(1, msg.length).split(' ');
-
-  console.log('new msg', content, args);
 
   // switch on the various command types
   switch (args[0]) {
@@ -57,12 +56,15 @@ const msgParser = (msg, content) => {
 };
 
 client.on('message', (msg) => {
-  if (msg.channel.id === '572770333648617472' && msg.content.startsWith('!')) {
-    var role = msg.guild.me.hasPermission(['SEND_MESSAGES']);
-    if (role) {
-      msgParser(msg, msg.content);
-    } else {
-      console.error("Permissons are insufficient!");
+  if (msg.channel.id === '572770333648617472') {
+    Swears.reply(msg);
+    if (msg.content.startsWith('!')) {
+      var role = msg.guild.me.hasPermission(['SEND_MESSAGES']);
+      if (role) {
+        msgParser(msg, msg.content);
+      } else {
+        console.error("Permissons are insufficient!");
+      }
     }
   }
 });

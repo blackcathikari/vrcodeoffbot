@@ -2,7 +2,6 @@
 const invalidMsg = (msg) => msg.channel.send("Error: invalid format. For more information, type `!help calc`");
 
 const parse = (msg, x, y, op) => {
-  console.log('parse', x, y, op);
   switch (op) {
     case '+': {
       return (x + y).toFixed(2);
@@ -34,7 +33,6 @@ const isValid = (num, string) => {
 };
 
 const reply = (msg, args) => {
-  console.log(args);
   if (args.length !== 3) {
     invalidMsg(msg);
   } else {
