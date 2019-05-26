@@ -2,20 +2,48 @@
 const invalidMsg = (msg) => msg.channel.send('Error: invalid command');
 const unimplementedMsg = (msg) => msg.channel.send('Sorry, this command is not implemented yet.');
 
+const helpMsg = `**!help**: Shows information about available commands.
+
+**Usage:** \`help <command>\`. Available commands are:
+- \`calc\`
+- \`from\`
+- \`sysinfo\``;
+
 const calcMsg = `**!calc**: Performs a math calculation on two numbers.
 
-\`!calc <numberA> <operator> <numberB>\`
+**Usage:** \`!calc <numberA> <operator> <numberB>\`
 - \`<numberA>\`: a valid integer or decimal number
 - \`<operator>\`: a maths operator (\`+\`, \`-\`, \`*\`, \`/\`)
 - \`<numberB>\`: a valid integer or decimal number`;
 
+const fromMsg = `**!from**: Performs unit conversion between two units.
+
+**Usage:** \`from <number> <unit> to <newUnit>\`
+- \`<number>\`: a valid integer or decimal number
+- \`<unit>\`: the unit to convert from
+- \`<newUnit>\`: the unit to convert to
+
+**Available units**:
+- *Distance:*
+--- Metric: mm, cm, m, km
+--- US: in, ft, yd
+- *Volume:*
+--- Metric: mL (aka cc), L
+--- US: oz (fluid), qt, gal
+- *Temperature:* c, f, k`;
+
+const sysinfoMsg = `**!sysinfo**: Shows information about the system on which the bot is running.`;
+
+const sendEmbed = (msg, content) => msg.channel.send({embed: { color: 3447003, description: content } });
+
 const reply = (msg, args) => {
   if (args.length === 1) {
     // general help
+    sendEmbed(msg, helpMsg);
   } else if (args.length === 2) {
     switch (args[1]) {
       case 'calc': {
-        msg.channel.send({embed: { color: 3447003, description: calcMsg } });
+        sendEmbed(msg, calcMsg);
         break;
       }
       case 'help': {
@@ -31,11 +59,11 @@ const reply = (msg, args) => {
         break;
       }
       case 'sysinfo': {
-        unimplementedMsg(msg);
+        sendEmbed(msg, sysinfoMsg);
         break;
       }
       case 'from': {
-        unimplementedMsg(msg);
+        sendEmbed(msg, fromMsg);
         break;
       }
       default: {

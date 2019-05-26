@@ -10,6 +10,7 @@
   "author": "CalamarCat",
   "license": "ISC",
   "dependencies": {
+    "convert-units": "^2.3.4",
     "discord.js": "^11.5.0",
     "esm": "^3.2.25",
     "systeminformation": "^4.5.1",

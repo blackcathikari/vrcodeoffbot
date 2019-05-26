@@ -4,6 +4,7 @@ import key from '../../key';
 import SysInfo from '../cmds/SysInfo';
 import Calc from '../cmds/Calc';
 import Help from '../cmds/Help';
+import From from '../cmds/From';
 
 // set up discord client
 const client = new Client();
@@ -17,9 +18,10 @@ const fallbackMsg = (msg) => msg.channel.send('Unknown command');
 const unimplementedMsg = (msg) => msg.channel.send('Sorry, this command is not implemented yet.');
 
 const msgParser = (msg, content) => {
-  console.log('new msg', content);
   // strip the ! then split on space
   const args = content.slice(1, msg.length).split(' ');
+
+  console.log('new msg', content, args);
 
   // switch on the various command types
   switch (args[0]) {
@@ -44,18 +46,18 @@ const msgParser = (msg, content) => {
       break;
     }
     case 'from': {
-      unimplementedMsg(msg);
+      From.reply(msg, args);
       break;
     }
     default: {
       fallbackMsg(msg);
     }
-    // plus unit converter and word blacklist
+    // plus word blacklist
   }
 };
 
 client.on('message', (msg) => {
-  if (msg.content.startsWith('!')) {
+  if (msg.channel.id === '572770333648617472' && msg.content.startsWith('!')) {
     var role = msg.guild.me.hasPermission(['SEND_MESSAGES']);
     if (role) {
       msgParser(msg, msg.content);

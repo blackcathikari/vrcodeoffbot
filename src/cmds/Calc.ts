@@ -29,7 +29,7 @@ const parse = (msg, x, y, op) => {
 };
 
 const isValid = (num, string) => {
-  const onlyNum = /^\d+(\.\d+)?$/.test(string);
+  const onlyNum = /^(-?)(\d+)(\.\d+)?$/.test(string);
   return onlyNum && num !== NaN ? true : false;
 };
 
